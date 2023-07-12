@@ -1,0 +1,65 @@
+
+[webserver]
+port = ":4000"
+
+  [webserver.headers]
+  Cache-Control = "s-maxage=3600"
+  Access-Control-Allow-Origin = "*"
+  Access-Control-Allow-Methods = "*"
+
+
+[cache]
+type = "redis"
+address = "${REDIS_HOST}"
+password = "${REDIS_PASSWORD}"
+ssl = "${REDIS_SSL}"
+ttl = 10
+max_zoom = 18
+db = 1
+
+[[providers]]
+name = "iott"
+type = "mvt_postgis"
+uri = "${DB_URL}" # PostGIS connection string (required)
+srid = 4326
+
+  [[providers.layers]]
+  name = "boundary"
+  geometry_fieldname = "boundary"
+  geometry_type="linestring"
+  id_fieldname = "id"
+  sql = "SELECT ST_AsMVTGeom(bound, !BBOX!) AS boundary, id FROM iot_shape WHERE bound && !BBOX!"
+
+  [[providers.layers]]
+  name = "hexagon"
+  geometry_fieldname = "hexagon"
+  geometry_type="Polygon"
+  id_fieldname = "id"
+  sql = "SELECT ST_AsMVTGeom(polygon, !BBOX!) AS hexagon, id FROM iot_shape WHERE polygon && !BBOX!"
+  
+
+  [[providers.layers]]
+  name = "location"
+  geometry_fieldname = "location"
+  geometry_type="point"
+  id_fieldname = "id"
+  sql = "SELECT ST_AsMVTGeom(location, !BBOX!) AS location, id FROM iot_shape WHERE location && !BBOX!"
+
+[[maps]]
+name = "iott"
+center = [105.69, 21.2374, 10.0982] # set the center of the map 
+
+  [[maps.layers]]
+  provider_layer = "iott.boundary"
+  min_zoom = 4
+  max_zoom = 25
+
+  [[maps.layers]]
+  provider_layer = "iott.hexagon"
+  min_zoom = 4
+  max_zoom = 25
+
+  [[maps.layers]]
+  provider_layer = "iott.location"
+  min_zoom = 4
+  max_zoom = 25
