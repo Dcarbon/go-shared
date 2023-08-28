@@ -20,7 +20,7 @@ const (
 	SensorTypeFlow        SensorType = 1
 	SensorTypePower       SensorType = 2
 	SensorTypeGPS         SensorType = 3
-	SensorTypeTemperature SensorType = 4
+	SensorTypeThermometer SensorType = 4
 )
 
 type DeviceStatus int32
@@ -51,11 +51,15 @@ func (am *AllMetric) IsValid(sType SensorType) error {
 	case SensorTypeNone:
 	case SensorTypeFlow:
 		if am.DefaultMetric.Val <= 0 {
-			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (value) must be > 0")
+			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (flow) must be > 0")
 		}
 	case SensorTypePower:
 		if am.DefaultMetric.Val <= 0 {
-			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (value) must be > 0")
+			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (power) must be > 0")
+		}
+	case SensorTypeThermometer:
+		if am.Val < -10 && am.Val > 1000 {
+			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (thermometer) must be in range [-10;1000]")
 		}
 	case SensorTypeGPS:
 		if am.Lat == 0 && am.Lng == 0 {

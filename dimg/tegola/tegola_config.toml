@@ -28,14 +28,14 @@ srid = 4326
   geometry_fieldname = "boundary"
   geometry_type="linestring"
   id_fieldname = "id"
-  sql = "SELECT ST_AsMVTGeom(bound, !BBOX!) AS boundary, id FROM iot_shape WHERE bound && !BBOX!"
+  sql = "SELECT ST_AsMVTGeom(bound, !BBOX!) AS boundary, id FROM iot_shape WHERE bound && !BBOX! AND status = 10"
 
   [[providers.layers]]
   name = "hexagon"
   geometry_fieldname = "hexagon"
   geometry_type="Polygon"
   id_fieldname = "id"
-  sql = "SELECT ST_AsMVTGeom(polygon, !BBOX!) AS hexagon, id FROM iot_shape WHERE polygon && !BBOX!"
+  sql = "SELECT ST_AsMVTGeom(polygon, !BBOX!) AS hexagon, id FROM iot_shape WHERE polygon && !BBOX! AND status = 10"
   
 
   [[providers.layers]]
@@ -43,7 +43,7 @@ srid = 4326
   geometry_fieldname = "location"
   geometry_type="point"
   id_fieldname = "id"
-  sql = "SELECT ST_AsMVTGeom(location, !BBOX!) AS location, id FROM iot_shape WHERE location && !BBOX!"
+  sql = "SELECT ST_AsMVTGeom(location, !BBOX!) AS location, id FROM iot_shape WHERE location && !BBOX! AND status = 10"
 
 [[maps]]
 name = "iott"
