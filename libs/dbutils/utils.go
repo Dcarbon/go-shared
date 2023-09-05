@@ -53,6 +53,8 @@ func CreateDB(dbURL string) {
 		parsed.Database,
 	)
 	cmd.Env = append(cmd.Env, fmt.Sprintf("PGPASSWORD=%s", parsed.Password))
-	err = cmd.Run()
-	log.Println("Create db error: ", err)
+	cmd.Run()
+
+	// err = cmd.Run()
+	// log.Println("Create db error: ", err)
 }

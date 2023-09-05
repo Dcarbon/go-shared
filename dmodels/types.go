@@ -9,6 +9,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/Dcarbon/go-shared/ecodes"
 )
 
 var regString = regexp.MustCompile(`"*"$`)
@@ -51,22 +53,22 @@ func (am *AllMetric) IsValid(sType SensorType) error {
 	case SensorTypeNone:
 	case SensorTypeFlow:
 		if am.DefaultMetric.Val <= 0 {
-			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (flow) must be > 0")
+			return NewError(ecodes.SensorInvalidMetric, "Indicator of metric (flow) must be > 0")
 		}
 	case SensorTypePower:
 		if am.DefaultMetric.Val <= 0 {
-			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (power) must be > 0")
+			return NewError(ecodes.SensorInvalidMetric, "Indicator of metric (power) must be > 0")
 		}
 	case SensorTypeThermometer:
 		if am.Val < -10 && am.Val > 1000 {
-			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (thermometer) must be in range [-10;1000]")
+			return NewError(ecodes.SensorInvalidMetric, "Indicator of metric (thermometer) must be in range [-10;1000]")
 		}
 	case SensorTypeGPS:
 		if am.Lat == 0 && am.Lng == 0 {
-			return NewError(ECodeSensorInvalidMetric, "Indicator of metric (gps) must be != 0")
+			return NewError(ecodes.SensorInvalidMetric, "Indicator of metric (gps) must be != 0")
 		}
 	default:
-		return NewError(ECodeSensorInvalidType, "Sensor type is not existed")
+		return NewError(ecodes.SensorInvalidType, "Sensor type is not existed")
 	}
 	return nil
 }

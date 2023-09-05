@@ -5,6 +5,7 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/Dcarbon/go-shared/ecodes"
 	"github.com/Dcarbon/go-shared/libs/esign"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/common/hexutil"
@@ -61,22 +62,22 @@ func (addr *EthAddress) String() string {
 // Data and signed is hex string (0x....)
 func (addr *EthAddress) VerifyPersonalSign(data, signed string) error {
 	if nil == addr {
-		return NewError(ECodeAddressIsEmpty, "Address is empty")
+		return NewError(ecodes.AddressIsEmpty, "Address is empty")
 	}
 
 	rawX, err := hexutil.Decode(data)
 	if nil != err {
-		return NewError(ECodeInvalidSignature, "Data of signature must be hex")
+		return NewError(ecodes.InvalidSignature, "Data of signature must be hex")
 	}
 
 	rawSigned, err := hexutil.Decode(signed)
 	if nil != err {
-		return NewError(ECodeInvalidSignature, "Signature must be hex")
+		return NewError(ecodes.InvalidSignature, "Signature must be hex")
 	}
 
 	err = esign.VerifyPersonalSign(string(*addr), rawX, rawSigned)
 	if nil != err {
-		return NewError(ECodeInvalidSignature, "Signature invalid")
+		return NewError(ecodes.InvalidSignature, "Signature invalid")
 	}
 
 	return nil
