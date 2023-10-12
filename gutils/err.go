@@ -56,30 +56,30 @@ func ErrNotFoundf(msg string, params ...interface{}) error {
 	return status.Errorf(ecodes.NotExisted, fmt.Sprintf(msg, params...))
 }
 
-func ErrExisted(msg string) error {
-	return status.Errorf(ecodes.Existed, msg)
+func ErrExisted(msg string, params ...interface{}) error {
+	return status.Errorf(ecodes.Existed, fmt.Sprintf(msg, params...))
 }
 
-func ParsePostgresError(err error, modelName string) error {
-	if nil == err {
-		return nil
-	}
+// func ParsePostgresError(err error, modelName string) error {
+// 	if nil == err {
+// 		return nil
+// 	}
 
-	if err == gorm.ErrRecordNotFound {
-		return status.Errorf(
-			ecodes.NotExisted,
-			modelName+" is not existed",
-		)
-	}
+// 	if err == gorm.ErrRecordNotFound {
+// 		return status.Errorf(
+// 			ecodes.NotExisted,
+// 			modelName+" is not existed",
+// 		)
+// 	}
 
-	if strings.Contains(err.Error(), "duplicate") {
-		return status.Errorf(
-			ecodes.NotExisted,
-			modelName+" is existed",
-		)
-	}
-	return ErrInternal(err)
-}
+// 	if strings.Contains(err.Error(), "duplicate") {
+// 		return status.Errorf(
+// 			ecodes.NotExisted,
+// 			modelName+" is existed",
+// 		)
+// 	}
+// 	return ErrInternal(err)
+// }
 
 func ParsePostgres(modelName string, err error) error {
 	if nil == err {

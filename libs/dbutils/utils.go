@@ -22,6 +22,8 @@ func MustNewDB(dbURL string) *gorm.DB {
 }
 
 func NewDB(dbURL string) (*gorm.DB, error) {
+	CreateDB(dbURL)
+
 	var db, err = gorm.Open(postgres.Open(dbURL), &gorm.Config{})
 	if nil != err {
 		return nil, err

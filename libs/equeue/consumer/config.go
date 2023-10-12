@@ -19,6 +19,7 @@ func (c *Config[T]) CreateConsumer(conn interface{}) (*Consumer[T], error) {
 	return nil, nil
 }
 
-// func (c *Config[T]) CreateConsumerRetry(conn interface{}) (*ConsumerRetry[T], error) {
+// func (c *Config[T]) CreateConsumerRetry(conn interface{},
+//) (*ConsumerRetry[T], error) {
 // 	return nil, nil
 // }

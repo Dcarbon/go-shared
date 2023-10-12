@@ -16,7 +16,9 @@ func GetCC(host string) (*grpc.ClientConn, error) {
 	}
 	cc, err := grpc.Dial(
 		host,
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithTransportCredentials(
+			insecure.NewCredentials(),
+		),
 		grpc.WithBlock(),
 	)
 	if nil != err {

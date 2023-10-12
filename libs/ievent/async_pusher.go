@@ -1,26 +1,25 @@
-package broker
+package ievent
 
 import (
 	"context"
-	"encoding/json"
-	"log"
 
 	"github.com/Dcarbon/go-shared/libs/rabbit"
-	"github.com/streadway/amqp"
 )
 
 // AsyncPusher :
 type asyncPusher struct {
-	evQueue chan Event
-	rbChan  rabbit.IChannel
+	*pusher
+	evQueue chan *Event
 	cancel  context.CancelFunc
 }
 
 // NewAsyncPusher :
 func NewAsyncPusher(rbChan rabbit.IChannel, bandWidth int) IPublisher {
 	var ap = &asyncPusher{
-		evQueue: make(chan Event, bandWidth),
-		rbChan:  rbChan,
+		pusher: &pusher{
+			rbChan: rbChan,
+		},
+		evQueue: make(chan *Event, bandWidth),
 	}
 
 	ap.Start()
@@ -40,7 +39,7 @@ func (ap *asyncPusher) Stop() {
 	}
 }
 
-func (ap *asyncPusher) Publish(ev Event) error {
+func (ap *asyncPusher) Publish(ev *Event) error {
 	ap.evQueue <- ev
 	return nil
 }
@@ -59,40 +58,10 @@ func (ap *asyncPusher) waitEvent() {
 		}
 		select {
 		case ev := <-ap.evQueue:
-			ap.push(&ev)
+			ap.push(ev)
 		case <-ctx.Done():
 			cancel()
 			cancel = nil
 		}
-	}
-}
-
-func (ap *asyncPusher) push(ev *Event) {
-	var raw []byte
-	var err error
-
-	if tmp, ok := ev.Data.([]byte); ok {
-		raw = tmp
-	} else {
-		raw, err = json.Marshal(ev.Data)
-		if nil != err {
-			log.Println("asyncPusher: marshall event error: ", ev, err)
-			return
-		}
-	}
-
-	err = ap.rbChan.Publish(
-		ev.Exchange,
-		ev.Queue,
-		false,
-		false,
-		amqp.Publishing{
-			ContentType: "application/json",
-			Body:        raw,
-			Headers:     ev.Headers,
-		})
-
-	if nil != err {
-		log.Printf("Push event to queue %s error: %s\n", ev.Queue, err.Error())
 	}
 }

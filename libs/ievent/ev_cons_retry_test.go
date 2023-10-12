@@ -1,4 +1,4 @@
-package broker
+package ievent
 
 import (
 	"encoding/json"
@@ -24,7 +24,7 @@ func TestEventConsumerRetry(t *testing.T) {
 	}
 	var name = "test-cons-retry"
 
-	cons, err := NewEventConsumerRetry(
+	cons, err := NewConsumerRetry(
 		name,
 		rbConn,
 		consEventForConsumerRetry,

@@ -2,7 +2,7 @@ package edef
 
 import (
 	"github.com/Dcarbon/go-shared/dmodels"
-	"github.com/Dcarbon/go-shared/libs/broker"
+	"github.com/Dcarbon/go-shared/libs/ievent"
 )
 
 const (
@@ -11,26 +11,26 @@ const (
 )
 
 type IOTEvent struct {
-	pusher broker.IPublisher
+	pusher ievent.IPublisher
 }
 
-func NewIOTEvent(pusher broker.IPublisher) *IOTEvent {
+func NewIOTEvent(pusher ievent.IPublisher) *IOTEvent {
 	var ievent = &IOTEvent{
 		pusher: pusher,
 	}
 	return ievent
 }
 
-func (ievent *IOTEvent) PushIOTCreate(ev *EventIOTCreate) error {
-	return ievent.pusher.Publish(broker.Event{
+func (iotEvent *IOTEvent) PushIOTCreate(ev *EventIOTCreate) error {
+	return iotEvent.pusher.Publish(&ievent.Event{
 		Exchange: XIOTCreated,
 		Queue:    "",
 		Data:     ev,
 	})
 }
 
-func (ievent *IOTEvent) PushIOTChangeStatus(ev *EventIOTChangeStatus) error {
-	return ievent.pusher.Publish(broker.Event{
+func (iotEvent *IOTEvent) PushIOTChangeStatus(ev *EventIOTChangeStatus) error {
+	return iotEvent.pusher.Publish(&ievent.Event{
 		Exchange: XIOTChangeStatus,
 		Queue:    "",
 		Data:     ev,

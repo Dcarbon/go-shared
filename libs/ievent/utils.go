@@ -1,4 +1,4 @@
-package broker
+package ievent
 
 import (
 	"encoding/json"

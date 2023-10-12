@@ -69,6 +69,10 @@ func ErrNotFound(msg string) error {
 	return NewError(ecodes.NotExisted, msg)
 }
 
+func ErrExisted(msg string, params ...interface{}) error {
+	return NewError(ecodes.Existed, fmt.Sprintf(msg+" is existed", params...))
+}
+
 // ErrInternal :
 func ErrNotImplement() error {
 	return NewError(ecodes.NotImplement, "not implement")

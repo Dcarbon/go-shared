@@ -18,9 +18,7 @@ type AuthInterceptor struct {
 }
 
 // NewAuthInterceptor :
-func NewAuthInterceptor(
-	iamHost, jwtKey string,
-	config map[string]*ARConfig,
+func NewAuthInterceptor(jwtKey string, config map[string]*ARConfig,
 ) (*AuthInterceptor, error) {
 	// var iam adin.IAMClient
 	// if iamHost != "" {

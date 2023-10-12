@@ -2,7 +2,7 @@ package edef
 
 import (
 	"github.com/Dcarbon/go-shared/dmodels"
-	"github.com/Dcarbon/go-shared/libs/broker"
+	"github.com/Dcarbon/go-shared/libs/ievent"
 )
 
 const (
@@ -22,10 +22,10 @@ type SMSign struct {
 
 // SensorPusher: Sensor event pusher
 type SensorPusher struct {
-	pusher broker.IPublisher
+	pusher ievent.IPublisher
 }
 
-func NewSensorPusher(pusher broker.IPublisher) *SensorPusher {
+func NewSensorPusher(pusher ievent.IPublisher) *SensorPusher {
 	var spusher = &SensorPusher{
 		pusher: pusher,
 	}
@@ -33,7 +33,7 @@ func NewSensorPusher(pusher broker.IPublisher) *SensorPusher {
 }
 
 func (spusher *SensorPusher) PushNewMetric(sign *SMSign) {
-	spusher.pusher.Publish(broker.Event{
+	spusher.pusher.Publish(&ievent.Event{
 		Exchange: XSensorMetric,
 		Data:     sign,
 	})
