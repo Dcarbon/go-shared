@@ -2,6 +2,7 @@ package gutils
 
 // Config :
 type Config struct {
+	Env        string               // prod || dev || stg
 	Port       int                  //
 	DbURL      string               //
 	JwtKey     string               //
