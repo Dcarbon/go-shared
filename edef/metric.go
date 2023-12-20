@@ -12,8 +12,8 @@ const (
 // Sensor metric signature
 type SMSign struct {
 	IsIotSign  bool               `json:"isIotSign" ` //
-	IotID      int64              `json:"iotId"`      //
-	SensorID   int64              `json:"sensorId" `  //
+	IotId      int64              `json:"iotId"`      //
+	SensorId   int64              `json:"sensorId" `  //
 	SensorType dmodels.SensorType `json:"sensorType"` //
 	Data       string             `json:"data" `      // Hex json of SensorMetricExtract
 	Signed     string             `json:"signed"`     // RSV Data

@@ -2,6 +2,7 @@ package dmodels
 
 import (
 	"database/sql/driver"
+	"encoding/base64"
 	"errors"
 	"strings"
 
@@ -73,6 +74,29 @@ func (addr *EthAddress) VerifyPersonalSign(data, signed string) error {
 	rawSigned, err := hexutil.Decode(signed)
 	if nil != err {
 		return NewError(ecodes.InvalidSignature, "Signature must be hex")
+	}
+
+	err = esign.VerifyPersonalSign(string(*addr), rawX, rawSigned)
+	if nil != err {
+		return NewError(ecodes.InvalidSignature, "Signature invalid")
+	}
+
+	return nil
+}
+
+func (addr *EthAddress) VerifyPersonalSignBase64(data, signed string) error {
+	if nil == addr {
+		return NewError(ecodes.AddressIsEmpty, "Address is empty")
+	}
+
+	rawX, err := base64.StdEncoding.DecodeString(data)
+	if nil != err {
+		return NewError(ecodes.InvalidSignature, "Data of signature must be base64")
+	}
+
+	rawSigned, err := base64.StdEncoding.DecodeString(signed)
+	if nil != err {
+		return NewError(ecodes.InvalidSignature, "Signature must be base64")
 	}
 
 	err = esign.VerifyPersonalSign(string(*addr), rawX, rawSigned)

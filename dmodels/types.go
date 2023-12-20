@@ -28,9 +28,16 @@ const (
 type DeviceStatus int32
 
 const (
-	DeviceStatusReject   DeviceStatus = -1
-	DeviceStatusRegister DeviceStatus = 0
+	DeviceStatusReject   DeviceStatus = 1
+	DeviceStatusRegister DeviceStatus = 5
 	DeviceStatusSuccess  DeviceStatus = 10
+)
+
+type Sort int
+
+const (
+	SortASC  Sort = 0
+	SortDesc Sort = 1
 )
 
 type DefaultMetric struct {

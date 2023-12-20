@@ -11,43 +11,43 @@ import (
 	"github.com/twpayne/go-geom/encoding/ewkb"
 )
 
-// Point:
-type Point struct {
+// Coord:
+type Coord struct {
 	SRID int     `json:"srid"` //
 	Lat  float64 `json:"lat"`  // vi tuyen (pgis: y)
 	Lng  float64 `json:"lng"`  // kinh tuyen:(pgis: x)
 }
 
-func NewPoint(srid int, lng, lat float64) *Point {
-	return &Point{
+func NewCoord(srid int, lng, lat float64) *Coord {
+	return &Coord{
 		SRID: srid,
 		Lat:  lat,
 		Lng:  lng,
 	}
 }
 
-func NewPoint4326(lng, lat float64) *Point {
-	return &Point{
+func NewCoord4326(lng, lat float64) *Coord {
+	return &Coord{
 		SRID: 4326,
 		Lat:  lat,
 		Lng:  lng,
 	}
 }
 
-func NewPoint3857(lng, lat float64) *Point {
-	return &Point{
+func NewCoord3857(lng, lat float64) *Coord {
+	return &Coord{
 		SRID: 3857,
 		Lat:  lat,
 		Lng:  lng,
 	}
 }
 
-func (p *Point) String() string {
-	return fmt.Sprintf("SRID=%d;POINT(%v %v)", p.SRID, p.Lng, p.Lat)
+func (p *Coord) String() string {
+	return fmt.Sprintf("SRID=%d;Coord(%v %v)", p.SRID, p.Lng, p.Lat)
 }
 
 // Scan :
-func (p *Point) Scan(val interface{}) error {
+func (p *Coord) Scan(val interface{}) error {
 	if val == nil {
 		return nil
 	}
@@ -78,25 +78,25 @@ func (p *Point) Scan(val interface{}) error {
 }
 
 // Value :
-func (p Point) Value() (driver.Value, error) {
+func (p Coord) Value() (driver.Value, error) {
 	return p.String(), nil
 }
 
-// MakePoint :
-func (p *Point) MakePoint() string {
-	return fmt.Sprintf("ST_SetSRID(ST_MakePoint(%f, %f), %d)", p.Lng, p.Lat, p.SRID)
+// MakeCoord :
+func (p *Coord) MakeCoord() string {
+	return fmt.Sprintf("ST_SetSRID(ST_MakeCoord(%f, %f), %d)", p.Lng, p.Lat, p.SRID)
 }
 
-func (p *Point) GetCoord() geom.Coord {
+func (p *Coord) GetCoord() geom.Coord {
 	return geom.Coord{p.Lng, p.Lat}
 }
 
-func (p *Point) To3857() *Point {
+func (p *Coord) To3857() *Coord {
 	if p.SRID == 3857 {
-		return NewPoint3857(p.Lng, p.Lat)
+		return NewCoord3857(p.Lng, p.Lat)
 	}
 
-	var p2 = NewPoint3857(
+	var p2 = NewCoord3857(
 		(p.Lng*20037508.34)/180,
 		math.Log(math.Tan(((90.0+p.Lat)*math.Pi)/360))/(math.Pi/180),
 	)
@@ -105,12 +105,12 @@ func (p *Point) To3857() *Point {
 	return p2
 }
 
-func (p *Point) To4326() *Point {
+func (p *Coord) To4326() *Coord {
 	if p.SRID == 4326 {
-		return NewPoint4326(p.Lng, p.Lat)
+		return NewCoord4326(p.Lng, p.Lat)
 	}
 
-	var p2 = NewPoint4326(
+	var p2 = NewCoord4326(
 		(p.Lng*180.0)/20037508.34,
 		(p.Lat*180.0)/20037508.34,
 	)
