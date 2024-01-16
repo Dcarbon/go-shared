@@ -1,4 +1,4 @@
-TAG=harbor.viet-tin.com/dcarbon/tegola
+TAG=dcarbon/tegola
 docker build -t $TAG .
 
 if [[ "$1" == "push" ]]; then

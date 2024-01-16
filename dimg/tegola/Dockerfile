@@ -1,4 +1,4 @@
-FROM harbor.viet-tin.com/dcarbon/golang as builder
+FROM dcarbon/golang as builder
 
 WORKDIR /tmp
 
@@ -7,7 +7,7 @@ RUN git clone https://github.com/go-spatial/tegola.git &&  \
     go build -buildvcs=false && \
     echo "Build tegola done ...!"
 
-FROM harbor.viet-tin.com/dcarbon/dimg:minimal
+FROM dcarbon/dimg:minimal
 COPY --from=builder /tmp/tegola/cmd/tegola/tegola /usr/bin/tegola
 
 COPY ./run_tegola.sh /usr/bin/

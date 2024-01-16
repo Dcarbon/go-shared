@@ -1,6 +1,6 @@
-# Images name: harbor.viet-tin.com/dcarbon/golang
+# Images name: dcarbon/golang
 
-FROM harbor.viet-tin.com/dcarbon/golang
+FROM dcarbon/arch-proto:golang
 
 
 WORKDIR /dcarbon/go-shared

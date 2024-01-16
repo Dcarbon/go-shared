@@ -92,3 +92,18 @@ func GenerateKey() {
 	address := crypto.PubkeyToAddress(*publicKeyECDSA).Hex()
 	fmt.Println("Address:", address)
 }
+
+func GetAddress(pKey string) (string, error) {
+	prvKey, err := crypto.HexToECDSA(pKey)
+	if nil != err {
+		return "", err
+	}
+	publicKey := prvKey.Public()
+	publicKeyECDSA, ok := publicKey.(*ecdsa.PublicKey)
+	if !ok {
+		log.Fatal("cannot assert type: publicKey is not of type *ecdsa.PublicKey")
+	}
+
+	address := crypto.PubkeyToAddress(*publicKeyECDSA).Hex()
+	return address, nil
+}

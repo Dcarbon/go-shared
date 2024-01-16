@@ -2,15 +2,19 @@ package gutils
 
 import (
 	"fmt"
+	"net/url"
 	"os"
 	"strconv"
+	"strings"
+
+	"github.com/Dcarbon/go-shared/libs/utils"
 )
 
 // Config :
 type Config struct {
 	Env        string               // prod || dev || stg
 	Port       int                  //
-	DbURL      string               //
+	DbUrl      string               //
 	JwtKey     string               //
 	Name       string               // Service name
 	Options    map[string]string    //
@@ -29,6 +33,23 @@ func (config *Config) GetOption(key string) string {
 	return v
 }
 
+func (config *Config) GetDBUrl() string {
+	urlParsed, err := url.Parse(config.DbUrl)
+	utils.PanicError("Parse db url ", err)
+	var query = urlParsed.Query()
+
+	if !strings.Contains(config.DbUrl, "sslmode") {
+		query.Add("sslmode", "disable")
+	}
+
+	if !strings.Contains(config.DbUrl, "application_name") {
+		query.Add("application_name", config.Name)
+	}
+
+	urlParsed.RawQuery = query.Encode()
+	return urlParsed.String()
+}
+
 func (config *Config) GetOptInt(key string) int64 {
 	vStr := config.GetOption(key)
 	v, err := strconv.ParseInt(vStr, 10, 64)
@@ -44,6 +65,14 @@ func (config *Config) GetAMQPUrl() string {
 
 func (config *Config) GetRedisUrl() string {
 	return config.GetOption("REDIS_URL")
+}
+
+func (config *Config) GetIotHost() string {
+	return config.GetOption(ISVIotInfo)
+}
+
+func (config *Config) GetStorageHost() string {
+	return config.GetOption(ISVStorage)
 }
 
 func (config *Config) GetUser() string {

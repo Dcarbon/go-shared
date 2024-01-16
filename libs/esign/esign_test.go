@@ -57,3 +57,15 @@ func TestParse(t *testing.T) {
 	// var raw = x.Bytes()
 	fmt.Println("", hexutil.EncodeBig(x))
 }
+
+func TestGenerate(t *testing.T) {
+	GenerateKey()
+}
+
+func TestGetAddress(t *testing.T) {
+	addr, err := GetAddress("0123456789012345678901234567890123456789012345678901234567880001")
+	if nil != err {
+		panicError("", err)
+	}
+	log.Println(addr)
+}

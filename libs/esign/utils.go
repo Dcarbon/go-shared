@@ -31,7 +31,7 @@ func HexPadRight(input string, numByte int) string {
 	return "0x" + input + strings.Repeat("00", offset)
 }
 
-func HexConcat(data []string) string {
+func HexConcat(data ...string) string {
 	var rs = "0x"
 	for _, it := range data {
 		if len(it) >= 2 && it[:2] == "0x" {

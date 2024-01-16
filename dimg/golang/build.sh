@@ -1,1 +1,1 @@
-docker build -t harbor.viet-tin.com/dcarbon/golang .
+docker build -t dcarbon/golang .

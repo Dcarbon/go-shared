@@ -43,7 +43,7 @@ func NewCoord3857(lng, lat float64) *Coord {
 }
 
 func (p *Coord) String() string {
-	return fmt.Sprintf("SRID=%d;Coord(%v %v)", p.SRID, p.Lng, p.Lat)
+	return fmt.Sprintf("SRID=%d;POINT(%v %v)", p.SRID, p.Lng, p.Lat)
 }
 
 // Scan :
@@ -97,8 +97,8 @@ func (p *Coord) To3857() *Coord {
 	}
 
 	var p2 = NewCoord3857(
-		(p.Lng*20037508.34)/180,
-		math.Log(math.Tan(((90.0+p.Lat)*math.Pi)/360))/(math.Pi/180),
+		(p.Lng*20037508.34)/180.0,
+		math.Log(math.Tan(((90.0+p.Lat)*math.Pi)/360.0))/(math.Pi/180.0),
 	)
 
 	p2.Lat = (p2.Lat * 20037508.34) / 180

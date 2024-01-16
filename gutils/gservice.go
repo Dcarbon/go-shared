@@ -10,10 +10,10 @@ import (
 
 type GService struct {
 	internalJWT string
-	Config      Config
+	Config      *Config
 }
 
-func NewGService(config Config, jwt string) (*GService, error) {
+func NewGService(config *Config, jwt string) (*GService, error) {
 	var gs = &GService{
 		Config: config,
 	}

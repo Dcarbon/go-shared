@@ -1,1 +1,1 @@
-docker build -t harbor.viet-tin.com/dcarbon/dimg:minimal .
+docker build -t dcarbon/dimg:minimal .

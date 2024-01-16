@@ -60,6 +60,10 @@ func ErrExisted(msg string, params ...interface{}) error {
 	return status.Errorf(ecodes.Existed, fmt.Sprintf(msg, params...))
 }
 
+func ErrServiceNotAvailable(serviceName string) error {
+	return status.Errorf(ecodes.ServiceNotAvailable, serviceName+" is not available")
+}
+
 // func ParsePostgresError(err error, modelName string) error {
 // 	if nil == err {
 // 		return nil

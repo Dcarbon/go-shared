@@ -31,7 +31,11 @@ const (
 )
 
 const (
-	Internal        = 50000
-	NotImplement    = 50001
-	NotRegisterAuth = 50002
+	// Runtime group
+	Internal            = 50000
+	ServiceNotAvailable = 50001
+
+	// Dev group
+	NotImplement    = 50020
+	NotRegisterAuth = 50021
 )

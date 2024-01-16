@@ -18,7 +18,7 @@ func TestHexPadRight(t *testing.T) {
 
 func TestHexConcat(t *testing.T) {
 	var arr = []string{"01", "0x02", "0x03", "04"}
-	fmt.Println("Hex concat: ", HexConcat(arr))
+	fmt.Println("Hex concat: ", HexConcat(arr...))
 }
 
 func TestPaddingByte(t *testing.T) {

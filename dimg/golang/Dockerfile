@@ -1,4 +1,4 @@
-# Images name: harbor.viet-tin.com/dcarbon/golang
+# Images name: dcarbon/golang
 
 FROM golang:1.19-alpine
 

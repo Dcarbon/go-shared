@@ -1,1 +1,1 @@
-docker build -t harbor.viet-tin.com/dcarbon/go-shared .
+docker build -t dcarbon/go-shared .

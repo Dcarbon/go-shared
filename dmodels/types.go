@@ -40,6 +40,40 @@ const (
 	SortDesc Sort = 1
 )
 
+func (s *Sort) String() string {
+	if *s == SortASC {
+		return "asc"
+	}
+	return "desc"
+}
+
+type DInterval int
+
+const (
+	DINone  DInterval = 0
+	DIHour  DInterval = 1
+	DIDay   DInterval = 2
+	DIMonth DInterval = 3
+	DIYear  DInterval = 4
+)
+
+func (di *DInterval) String() string {
+	switch *di {
+	case DINone:
+		return ""
+	case DIHour:
+		return "hour"
+	case DIDay:
+		return "day"
+	case DIMonth:
+		return "month"
+	case DIYear:
+		return "yearn"
+	default:
+		return ""
+	}
+}
+
 type DefaultMetric struct {
 	Val Float64 `json:"value,omitempty" cql:"value"`
 	// Params []Float64 `json:"params,omitempty" cql:"value"`
