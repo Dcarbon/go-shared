@@ -29,7 +29,7 @@ type EventSenSorMetricCreated struct {
 	SensorID int64                `json:"sensorId"`
 	Status   dmodels.DeviceStatus `json:"status"`
 	Address  string               `json:"address"`
-	Location *dmodels.Coord       `json:"location"` // Hex json of SensorMetricExtract
+	Location *GPS                 `json:"location"`
 }
 
 // SensorPusher: Sensor event pusher
