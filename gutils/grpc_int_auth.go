@@ -60,7 +60,6 @@ func (ai *AuthInterceptor) Intercept(
 			return nil, ErrorNoPermission
 		}
 		ctx = context.WithValue(ctx, ai.CtxKey, staff)
-		ctx = context.WithValue(ctx, "staff", staff)
 	}
 	return handler(ctx, req)
 }
