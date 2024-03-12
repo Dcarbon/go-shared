@@ -7,8 +7,9 @@ const (
 
 	ISVKeyStaff = "SV_STAFF" // 4085
 
-	ISVIotInfo = "SV_IOT_INFO" // 4002
-	ISVIotOp   = "SV_IOT_OP"   // 4003
+	ISVIotInfo        = "SV_IOT_INFO"         // 4002
+	ISVIotOp          = "SV_IOT_OP"           // 4003
+	ISVIotMapListener = "SV_IOT_MAP_LISTENER" // 4010
 
 	ISVProjects = "SV_PROJECT" // 4012
 
