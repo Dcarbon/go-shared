@@ -64,7 +64,8 @@ func Verify(addrStr string, org, signed []byte) error {
 	if nil != err {
 		return err
 	}
-	// fmt.Println("Address: ", crypto.PubkeyToAddress(*pubkey))
+
+	fmt.Println("Address: ", crypto.PubkeyToAddress(*pubkey))
 	if crypto.PubkeyToAddress(*pubkey) == inputPub {
 		return nil
 	}

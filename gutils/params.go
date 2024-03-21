@@ -14,7 +14,7 @@ const (
 	ISVProjects = "SV_PROJECT" // 4012
 
 	ISVSensorInfo = "SV_SENSOR_INFO" // 4030
-	ISVISM        = "SV_ISM"         // 4031
+	ISVISM        = "SV_SENSOR_ISM"  // 4031
 
 	ISVAUTH       = "SV_AUTH"       // 4005
 	ISVStorage    = "SV_STORAGE"    // 4100

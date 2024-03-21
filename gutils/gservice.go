@@ -47,9 +47,6 @@ func (gs *GService) login() error {
 		return err
 	}
 
-	if nil != err {
-		return err
-	}
 	gs.internalJWT = jwt
 	return nil
 }

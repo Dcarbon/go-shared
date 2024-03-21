@@ -10,7 +10,7 @@ import (
 type ValidatorInterceptor struct {
 }
 
-//Intercept :
+// Intercept :
 func (ai *ValidatorInterceptor) Intercept(
 	ctx context.Context,
 	req interface{},

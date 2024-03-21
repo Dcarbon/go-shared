@@ -2,6 +2,7 @@ package esign
 
 import (
 	"errors"
+	"fmt"
 	"log"
 
 	"github.com/ethereum/go-ethereum/common"
@@ -14,6 +15,26 @@ type TypedDataDomain struct {
 	ChainId           int64  `json:"chainid,omitempty"`           // Hex
 	VerifyingContract string `json:"verifyingcontract,omitempty"` // Address
 	Salt              string `json:"salt,omitempty"`              // Hex
+}
+
+func (td2 *TypedDataDomain) String() string {
+	if td2 == nil {
+		return ""
+	}
+	return fmt.Sprintf(
+		"Name:%s Version:%s ChainId:%d Contract:%s",
+		td2.Name, td2.Version, td2.ChainId, td2.VerifyingContract,
+	)
+}
+
+func (td2 *TypedDataDomain) Clone() string {
+	if td2 == nil {
+		return ""
+	}
+	return fmt.Sprintf(
+		"Name:%s Version:%s ChainId:%d Contract:%s",
+		td2.Name, td2.Version, td2.ChainId, td2.VerifyingContract,
+	)
 }
 
 type ERC712 struct {
@@ -67,6 +88,23 @@ func MustNewERC712(domain *TypedDataDomain, types *TypedDataField,
 
 	e712.domainHash = domainHash
 	return e712
+}
+
+func (e712 *ERC712) String() string {
+	var rs = ""
+	if e712 == nil {
+		return rs
+	}
+
+	if e712.domain != nil {
+		rs += e712.domain.String()
+	}
+
+	return rs
+}
+
+func (e712 *ERC712) GetDomain() *TypedDataDomain {
+	return e712.domain
 }
 
 func (e712 *ERC712) Hash(data map[string]interface{},

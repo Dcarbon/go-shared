@@ -14,8 +14,8 @@ func TestErc712(t *testing.T) {
 		&TypedDataDomain{
 			Name:              "Carbon",
 			Version:           "1",
-			ChainId:           1,
-			VerifyingContract: "0xA1E064Fd61B76cf11CE3b5816344f861b6318cea",
+			ChainId:           1337,
+			VerifyingContract: "0x9C399C33a393334D28e8bA4FFF45296f50F82d1f",
 		},
 		MustNewTypedDataField(
 			"Mint",
@@ -27,19 +27,23 @@ func TestErc712(t *testing.T) {
 	)
 	panicError("", err)
 
+	address, err := GetAddress(PrvStr)
+	panicError("", err)
+
 	var data = map[string]interface{}{
-		"iot":    "0x5c77E37aA7AFa0064b1eFb01cFbf2EfdFF49E7EA",
+		"iot":    address,
 		"amount": "0xff12aa",
-		"nonce":  -200,
+		"nonce":  1,
 	}
 
 	signed, err := minter.Sign(PrvStr, data)
 	panicError("Minter signed", err)
+
 	signedHex := hexutil.Encode(signed)
 	log.Println("Minter signed hex: ", signedHex)
 
 	err = minter.Verify(
-		"0x5c77E37aA7AFa0064b1eFb01cFbf2EfdFF49E7EA",
+		address,
 		signed,
 		data,
 	)

@@ -22,7 +22,8 @@ const (
 	SensorTypeFlow        SensorType = 1
 	SensorTypePower       SensorType = 2
 	SensorTypeGPS         SensorType = 3
-	SensorTypeThermometer SensorType = 4
+	SensorTypeThermometer SensorType = 4 // For cockstove
+	SensorTypeFanLevel    SensorType = 5 // For cockstove
 )
 
 type DeviceStatus int32
@@ -31,6 +32,18 @@ const (
 	DeviceStatusReject   DeviceStatus = 1
 	DeviceStatusRegister DeviceStatus = 5
 	DeviceStatusSuccess  DeviceStatus = 10
+)
+
+type IotType int32
+
+const (
+	IotTypeNone        IotType = 0
+	IotTypeWindPower   IotType = 10
+	IotTypeSolarPower  IotType = 11
+	IotTypeBurnMethane IotType = 20
+	IotTypeBurnBiomass IotType = 21
+	IotTypeFertilizer  IotType = 30
+	IotTypeBurnTrash   IotType = 31
 )
 
 type Sort int

@@ -2,9 +2,10 @@ package svc
 
 import (
 	"context"
+	"time"
+
 	"github.com/Dcarbon/arch-proto/pb"
 	"github.com/Dcarbon/go-shared/gutils"
-	"time"
 )
 
 type ISensorService interface {

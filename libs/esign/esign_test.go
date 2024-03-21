@@ -38,7 +38,7 @@ func TestSign(t *testing.T) {
 }
 
 func TestPersonal(t *testing.T) {
-	var data = []byte("this is test")
+	var data = []byte("this is sdflkasdhfi`1h3iknsdf;fjasd;lfjl;asdf")
 	var signed, err = SignPersonal(PrvStr, data)
 	if nil != err {
 		panic("Sign personal error: " + err.Error())

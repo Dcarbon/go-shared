@@ -2,12 +2,13 @@ package svc
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/Dcarbon/go-shared/dmodels"
 )
 
 var DefaultMockIot = []*Iot{
-	{Id: 1, Project: 1, Address: "0xE445517AbB524002Bb04C96F96aBb87b8B19b53d", Status: dmodels.DeviceStatusSuccess},
+	{Id: 292, Project: 1, Address: "0xe445517abb524002bb04c96f96abb87b8b19b53d", Status: dmodels.DeviceStatusSuccess},
 	{Id: 2, Project: 2, Address: "0x19Adf96848504a06383b47aAA9BbBC6638E81afD", Status: dmodels.DeviceStatusSuccess},
 	{Id: 3, Project: 3, Address: "0x56D2C9baB06e391b470365be694671c0F1dE30EC", Status: dmodels.DeviceStatusSuccess},
 	{Id: 4, Project: 4, Address: "0x91f4F05882cE70A5d2eEbb459DaA96c866fBd5E7", Status: dmodels.DeviceStatusSuccess},
@@ -32,7 +33,7 @@ func NewMockIotClient(data ...*Iot) *mockIotClient {
 	}
 
 	for _, it := range data {
-		mockIot.mAddress[it.Address] = it
+		mockIot.mAddress[strings.ToLower(it.Address)] = it
 		mockIot.mId[it.Id] = it
 	}
 
@@ -53,7 +54,7 @@ func (miot *mockIotClient) GetById(id int64) (*Iot, error) {
 }
 
 func (miot *mockIotClient) GetByAddress(addr string) (*Iot, error) {
-	var iot = miot.mAddress[addr]
+	var iot = miot.mAddress[strings.ToLower(addr)]
 	if nil != iot {
 		return &Iot{
 			Id:      iot.Id,
