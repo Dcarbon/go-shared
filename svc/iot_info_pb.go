@@ -37,7 +37,7 @@ func (client *pbIotClient) GetById(id int64) (*Iot, error) {
 	return &Iot{
 		Id:      data.Id,
 		Project: data.Project,
-		Address: data.Adddress,
+		Address: data.Address,
 		Status:  dmodels.DeviceStatus(data.Status),
 	}, nil
 }
@@ -52,7 +52,7 @@ func (client *pbIotClient) GetByAddress(addr string) (*Iot, error) {
 	return &Iot{
 		Id:      data.Id,
 		Project: data.Project,
-		Address: data.Adddress,
+		Address: data.Address,
 		Status:  dmodels.DeviceStatus(data.Status),
 	}, nil
 }
