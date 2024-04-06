@@ -74,8 +74,10 @@ func (trans *Transform[T1, T2]) LoadAll(dbOld, dbNew *gorm.DB) error {
 		for _, it := range data {
 			converted, err := trans.OnConvert(it)
 			if nil != err {
-
-				log.Println()
+				log.Println("Convert data error: ", err)
+				continue
+			}
+			if converted == nil {
 				continue
 			}
 

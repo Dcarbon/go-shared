@@ -22,15 +22,15 @@ func TestHexConcat(t *testing.T) {
 }
 
 func TestPaddingByte(t *testing.T) {
-	fmt.Println(bytePad([]byte{20, 30}, 0))
+	fmt.Println(BytePad([]byte{20, 30}, 0))
 }
 
 func TestBytePadRight(t *testing.T) {
-	fmt.Println(bytePadRight([]byte{1, 2, 3, 4}, 3))
+	fmt.Println(BytePadRight([]byte{1, 2, 3, 4}, 3))
 }
 
 func TestByteConcate(t *testing.T) {
-	fmt.Println(byteConcat(
+	fmt.Println(ByteConcat(
 		[][]byte{
 			{1, 2, 3},
 			{1, 2, 3},

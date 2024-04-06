@@ -113,7 +113,7 @@ func (e712 *ERC712) Hash(data map[string]interface{},
 	if nil != err {
 		return nil, err
 	}
-	var sumByte = byteConcat([][]byte{
+	var sumByte = ByteConcat([][]byte{
 		{25, 1},
 		e712.domainHash,
 		dataHash,

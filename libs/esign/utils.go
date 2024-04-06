@@ -44,7 +44,7 @@ func HexConcat(data ...string) string {
 }
 
 // Padding to head (left)
-func bytePad(input []byte, numByte int) []byte {
+func BytePad(input []byte, numByte int) []byte {
 	if len(input) < numByte {
 		return append(make([]byte, numByte-len(input)), input...)
 	}
@@ -55,7 +55,7 @@ func bytePad(input []byte, numByte int) []byte {
 	return input
 }
 
-func bytePadRight(input []byte, numByte int) []byte {
+func BytePadRight(input []byte, numByte int) []byte {
 	var offset = numByte - (len(input) % numByte)
 	if offset == numByte && len(input) > 0 {
 		return input
@@ -63,7 +63,7 @@ func bytePadRight(input []byte, numByte int) []byte {
 	return append(input, make([]byte, offset)...)
 }
 
-func byteConcat(input [][]byte) []byte {
+func ByteConcat(input [][]byte) []byte {
 	var rs = make([]byte, 0)
 	for _, it := range input {
 		rs = append(rs, it...)

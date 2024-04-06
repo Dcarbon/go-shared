@@ -138,9 +138,9 @@ func (field *TypedDataField) encodeAddress(val interface{}) ([]byte, error) {
 		if nil != err {
 			return nil, err
 		}
-		return bytePad(addrByte, 32), nil
+		return BytePad(addrByte, 32), nil
 	case []byte:
-		return bytePad(tVal, 32), nil
+		return BytePad(tVal, 32), nil
 	default:
 		return nil, fmt.Errorf("value for TypedDataField address must be hex string")
 	}
@@ -152,9 +152,9 @@ func (field *TypedDataField) encodeBool(val interface{}) ([]byte, error) {
 		return nil, fmt.Errorf("value for TypedDataField bool must be bool")
 	}
 	if b {
-		return bytePad([]byte{1}, 32), nil
+		return BytePad([]byte{1}, 32), nil
 	}
-	return bytePad([]byte{0}, 32), nil
+	return BytePad([]byte{0}, 32), nil
 }
 
 func (field *TypedDataField) encodeBytes(val interface{}) ([]byte, error) {
@@ -223,15 +223,15 @@ func (field *TypedDataField) encodeIntXXX(val interface{}) ([]byte, error) {
 	if ibig.Sign() < 0 && field.Type[0] == 'u' {
 		return nil, fmt.Errorf("value is negative for TypedDataField unsign")
 	}
-	return bytePad(ibig.ToTwo(256), 32), nil
+	return BytePad(ibig.ToTwo(256), 32), nil
 }
 
 func (field *TypedDataField) encodeByteXXX(val interface{}) ([]byte, error) {
 	switch i := val.(type) {
 	case string:
-		return bytePadRight([]byte(i), 32), nil
+		return BytePadRight([]byte(i), 32), nil
 	case []byte:
-		return bytePadRight(i, 32), nil
+		return BytePadRight(i, 32), nil
 	}
 	return nil, fmt.Errorf("value for TypedDataField string must be string")
 }
@@ -254,7 +254,7 @@ func (field *TypedDataField) encodeStruct(val interface{}) ([]byte, error) {
 		ls = append(ls, hash)
 	}
 
-	return crypto.Keccak256(byteConcat(ls)), nil
+	return crypto.Keccak256(ByteConcat(ls)), nil
 }
 
 func (field *TypedDataField) encodeArray(val interface{}) ([]byte, error) {
