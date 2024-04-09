@@ -81,7 +81,7 @@ func (di *DInterval) String() string {
 	case DIMonth:
 		return "month"
 	case DIYear:
-		return "yearn"
+		return "year"
 	default:
 		return ""
 	}
