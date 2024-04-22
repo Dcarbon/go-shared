@@ -65,3 +65,8 @@ func (miot *mockIotClient) GetByAddress(addr string) (*Iot, error) {
 	}
 	return nil, errors.New("iot not found")
 }
+
+func (miot *mockIotClient) GetIotsActivated() (*[]Iot, error) {
+	// TODO: implement
+	return nil, nil
+}

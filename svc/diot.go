@@ -12,4 +12,5 @@ type Iot struct {
 type IIotInfo interface {
 	GetById(id int64) (*Iot, error)
 	GetByAddress(addr string) (*Iot, error)
+	GetIotsActivated() (*[]Iot, error)
 }

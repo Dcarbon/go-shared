@@ -56,3 +56,19 @@ func (client *pbIotClient) GetByAddress(addr string) (*Iot, error) {
 		Status:  dmodels.DeviceStatus(data.Status),
 	}, nil
 }
+
+func (client *pbIotClient) GetIotsActivated() (*[]Iot, error) {
+	iots, err := client.iiot.GetIots(context.TODO(), &pb.RIotGetList{Status: pb.IOTStatus_IOTS_Success})
+	if nil != err {
+		return nil, err
+	}
+	var result []Iot
+	for _, data := range iots.Data {
+		result = append(result, Iot{
+			Id:      data.Id,
+			Project: data.Project,
+			Address: data.Address,
+			Status:  dmodels.DeviceStatus(data.Status)})
+	}
+	return &result, nil
+}
