@@ -14,6 +14,18 @@ func NewSafeMap[K comparable, V any]() *SafeMap[K, V] {
 	return sm
 }
 
+func NewSafeMapFrom[K comparable, V any](data map[K]V) *SafeMap[K, V] {
+	var sm = &SafeMap[K, V]{
+		data: make(map[K]V),
+	}
+
+	for k, v := range data {
+		sm.data[k] = v
+	}
+
+	return sm
+}
+
 func (sm *SafeMap[K, V]) Get(k K) (V, bool) {
 	sm.mutex.RLock()
 	defer sm.mutex.RUnlock()

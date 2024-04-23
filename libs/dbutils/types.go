@@ -63,8 +63,8 @@ type Transform[TOld any, TNew any] struct {
 func (trans *Transform[T1, T2]) LoadAll(dbOld, dbNew *gorm.DB) error {
 	var skip = 0
 	var limit = 100
-	for {
 
+	for {
 		data := make([]*T1, 0, limit)
 		err := dbOld.Table(trans.TblOld).Offset(skip).Limit(limit).Order("id asc").Find(&data).Error
 		if nil != err {
