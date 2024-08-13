@@ -16,7 +16,8 @@ const (
 	ISVSensorInfo = "SV_SENSOR_INFO" // 4030
 	ISVISM        = "SV_SENSOR_ISM"  // 4031
 
-	ISVAUTH       = "SV_AUTH"       // 4005
-	ISVStorage    = "SV_STORAGE"    // 4100
-	EXTERNAL_HOST = "EXTERNAL_HOST" //
+	ISVAUTH        = "SV_AUTH"         // 4005
+	ISVStorage     = "SV_STORAGE"      // 4100
+	EXTERNAL_HOST  = "EXTERNAL_HOST"   //
+	ISNotification = "SV_Notification" // 4099
 )

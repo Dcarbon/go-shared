@@ -10,6 +10,7 @@ import (
 
 type ISensorService interface {
 	GetById(ctx context.Context, req *pb.IdInt64) (*pb.Sensor, error)
+	GetSensorByIotIdAndType(ctx context.Context, req *pb.RSSensorByIotIdAndSensorType) (*pb.Sensor, error)
 }
 
 type sensorService struct {
@@ -40,4 +41,18 @@ func NewSensorService(host string) (ISensorService, error) {
 		client: pb.NewSensorServiceClient(cc),
 	}
 	return client, nil
+}
+
+func (s sensorService) GetSensorByIotIdAndType(ctx context.Context, req *pb.RSSensorByIotIdAndSensorType) (*pb.Sensor, error) {
+	sensor, err := s.client.GetBySensorTypeAndIotId(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.Sensor{
+		Id:      sensor.Id,
+		IotId:   sensor.IotId,
+		Address: sensor.Address,
+		Status:  sensor.Status,
+		Type:    sensor.Type,
+	}, nil
 }

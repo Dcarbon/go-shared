@@ -6,8 +6,8 @@ import (
 	"testing"
 )
 
-const jwt = ""
-const host = "http://localhost:4005"
+const jwt = "x"
+const host = "http://54.151.254.13:4100"
 
 var s IStorage
 
@@ -24,7 +24,7 @@ func TestUploadImage(t *testing.T) {
 }
 
 func TestUploadProject(t *testing.T) {
-	path, err := s.UploadToProject("./static/gg.png", 1)
+	path, err := s.UploadToProject("./static/3e0858ab-6150-4b8e-8afd-74dc07983ab6.jpeg", 1)
 	if nil != err {
 		log.Fatalln("UploadFile error: ", err)
 	}
