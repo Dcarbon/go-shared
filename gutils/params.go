@@ -19,5 +19,6 @@ const (
 	ISVAUTH        = "SV_AUTH"         // 4005
 	ISVStorage     = "SV_STORAGE"      // 4100
 	EXTERNAL_HOST  = "EXTERNAL_HOST"   //
-	ISNotification = "SV_Notification" // 4099
+	ISNotification = "SV_NOTIFICATION" // 4099
+	ISFinance      = "SV_FINANCE"      // 4199
 )
