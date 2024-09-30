@@ -1,6 +1,6 @@
 # Images name: dcarbon/golang
 
-FROM golang:1.19-alpine
+FROM golang:1.23-alpine
 
 RUN apk update && apk add --no-cache git ca-certificates alpine-sdk
 
