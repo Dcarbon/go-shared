@@ -58,7 +58,7 @@ func (client *pbIotClient) GetByAddress(addr string) (*Iot, error) {
 }
 
 func (client *pbIotClient) GetIotsActivated() (*[]Iot, error) {
-	iots, err := client.iiot.GetIots(context.TODO(), &pb.RIotGetList{Status: int32(pb.IOTStatus_IOTS_Success.Number())})
+	iots, err := client.iiot.GetIots(context.TODO(), &pb.RIotGetList{Status: int32(pb.IOTStatus_IOTS_Success.Number()), Type: -1})
 	if nil != err {
 		return nil, err
 	}
