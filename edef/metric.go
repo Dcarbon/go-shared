@@ -2,9 +2,10 @@ package edef
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/Dcarbon/go-shared/dmodels"
 	"github.com/Dcarbon/go-shared/libs/ievent"
-	"log"
 )
 
 const (
@@ -59,5 +60,4 @@ func (spusher *SensorPusher) PushNewMetricToMapIoTListener(sign *EventSenSorMetr
 		log.Println(fmt.Sprintf("[SensorISM]: Emit event insert, publish event error: %s", err))
 		return
 	}
-	log.Println(fmt.Sprintf("[SensorISM]: Emit event insert success. "))
 }

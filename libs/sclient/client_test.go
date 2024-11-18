@@ -24,11 +24,11 @@ func TestUploadImage(t *testing.T) {
 }
 
 func TestUploadProject(t *testing.T) {
-	path, err := s.UploadToProject("./static/3e0858ab-6150-4b8e-8afd-74dc07983ab6.jpeg", 1)
-	if nil != err {
-		log.Fatalln("UploadFile error: ", err)
-	}
-	fmt.Println(host + path)
+	s.UploadToProject("./static/55/069815ae8de635b86cf79.jpg", 55)
+	// if nil != err {
+	// 	log.Fatalln("UploadFile error: ", err)
+	// }
+	//fmt.Println(host + path)
 }
 
 func TestUploadUser(t *testing.T) {

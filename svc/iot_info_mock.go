@@ -70,3 +70,8 @@ func (miot *mockIotClient) GetIotsActivated() (*[]Iot, error) {
 	// TODO: implement
 	return nil, nil
 }
+
+func (miot *mockIotClient) UpdateRemainTime(req RemainTime) error {
+	// TODO: implement
+	return nil
+}

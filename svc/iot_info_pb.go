@@ -35,10 +35,11 @@ func (client *pbIotClient) GetById(id int64) (*Iot, error) {
 		return nil, err
 	}
 	return &Iot{
-		Id:      data.Id,
-		Project: data.Project,
-		Address: data.Address,
-		Status:  dmodels.DeviceStatus(data.Status),
+		Id:         data.Id,
+		Project:    data.Project,
+		Address:    data.Address,
+		Status:     dmodels.DeviceStatus(data.Status),
+		TimeRemain: data.RemainTime,
 	}, nil
 }
 
@@ -71,4 +72,15 @@ func (client *pbIotClient) GetIotsActivated() (*[]Iot, error) {
 			Status:  dmodels.DeviceStatus(data.Status)})
 	}
 	return &result, nil
+}
+
+func (client *pbIotClient) UpdateRemainTime(req RemainTime) error {
+	_, err := client.iiot.UpdateRemain(context.TODO(), &pb.RUpdateRemainTime{
+		IotId:      req.Id,
+		RemainTime: req.RemainTime,
+	})
+	if nil != err {
+		return err
+	}
+	return nil
 }
